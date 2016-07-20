@@ -34,7 +34,7 @@ jenkins_updates_file:
 {% for plugin in jenkins.plugins.installed %}
 jenkins_install_plugin_{{ plugin }}:
   cmd.run:
-    - unless: {{ jenkins_cli('list-plugins') }} | cut -d ' ' -f 1 | grep -w {{ plugin }}
+    - unless: {{ jenkins_cli('list-plugins') }} | cut -d ' ' -f 1 | grep -x {{ plugin }}
     - name: {{ jenkins_cli('install-plugin', plugin) }}
     - timeout: 60
     - require:
